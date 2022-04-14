@@ -22,7 +22,7 @@ pipeline {
                 script {
                     def jobname = "maven_pipeline_p1"
                     def job = Jenkins.instance.getItemByFullName(jobname)
-                    def myVAr = job.getLastBuild()
+                    myVAr = job.getLastBuild()
                     println build
                 }
             }
