@@ -15,6 +15,13 @@ pipeline {
     }
 
     stages {
+        stage('Get deploy no'){
+            script {
+                def jobname = "maven_pipeline_p1"
+                def job = Jenkins.instance.getItemByFullName(jobname)
+                def build = job.getLastBuild()
+            }
+        }        
         stage('Deploy to App'){
             steps {
                 // Clean old Container
