@@ -19,7 +19,7 @@ pipeline {
     stages {
         stage('Get deploy no'){
             steps {
-                //script {
+                script {
                     //def jobname = 'maven_pipeline_p1'
                      def job = Jenkins.instance.getItemByFullName('maven_pipeline_p1')
                     //sh " myVAr = job.getLastBuild()" 
@@ -27,7 +27,7 @@ pipeline {
                     echo "var is : ${job}"
                     //sh "echo var is: $myVAr "
                     //println myVAr
-                //}
+                }
             }
         }   /*  
         stage('Deploy to App'){
