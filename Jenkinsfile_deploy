@@ -1,4 +1,4 @@
-def myVAr = 'value'
+def myVAr = '1'
 
 pipeline {
     agent {
@@ -38,9 +38,9 @@ pipeline {
                      // echo \"${ARTIFACTORY_CRED_PSW}\" | docker login -u \"${ARTIFACTORY_CRED_USR}\" docker-virtual.artifactory --password-stdin"
                     // sh "docker tag $image_name savaonu/$image_name"
 
-                        sh "docker pull docker-virtual.artifactory/${params.image_name}:117"
+                        sh "docker pull docker-virtual.artifactory/${params.image_name}:${myVAr}"
                         // Create container
-                        sh "docker run -p 8089:8080 -d --name ${params.container_name} docker-virtual.artifactory/${params.image_name}:117"
+                        sh "docker run -p 8089:8080 -d --name ${params.container_name} docker-virtual.artifactory/${params.image_name}:${myVAr}"
             }
         }
 
