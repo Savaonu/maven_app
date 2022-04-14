@@ -25,6 +25,12 @@ pipeline {
                 }
             }
         }        
+
+        stage('test'){
+
+            sh "echo $build"
+                sh "echo cacacacac"
+        }
         stage('Deploy to App'){
             steps {
                 // Clean old Container
