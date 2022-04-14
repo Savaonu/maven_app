@@ -21,9 +21,9 @@ pipeline {
             steps {
                 //script {
                     //def jobname = 'maven_pipeline_p1'
-                    sh " job = Jenkins.instance.getItemByFullName('maven_pipeline_p1')"
-                    sh " myVAr = job.getLastBuild()" 
-                    //echo "var is: ${job.getLastBuild()}"
+                    def job = Jenkins.instance.getItemByFullName('maven_pipeline_p1').getLastBuild()
+                    //sh " myVAr = job.getLastBuild()" 
+                    echo "var is: ${job}"
                     //sh "echo var is: $myVAr "
                     //println myVAr
                 //}
