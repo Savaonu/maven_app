@@ -1,3 +1,5 @@
+def myVAr = 'value'
+
 pipeline {
     agent {
             label "slave_maven_deploy"
@@ -15,27 +17,21 @@ pipeline {
     }
 
     stages {
-        /*stage('Get deploy no'){
+        stage('Get deploy no'){
             steps {
                 script {
                     def jobname = "maven_pipeline_p1"
                     def job = Jenkins.instance.getItemByFullName(jobname)
-                    def build = job.getLastBuild()
+                    def myVAr = job.getLastBuild()
                     println build
                 }
             }
-        }  */      
+        }       
         stage('Deploy to App'){
             steps {
-                script {
-                    def jobname = "maven_pipeline_p1"
-                    def job = Jenkins.instance.getItemByFullName(jobname)
-                    def build = job.getLastBuild()
-                    println build
+                    sh "echo ${myVar}"
                     // Clean old Container
                     //sh "chmod +x ./cleanup.sh && ./cleanup.sh "    
-                    execute( [ 'bash', '-c', 'echo build'])
-                    execute( [ 'bash', '-c', 'chmod +x ./cleanup.sh && ./cleanup.sh' ])
                     // Push to Artifactory docker registry
                     //withCredentials([usernamePassword(credentialsId: 'ae4a797f-6a03-4dc7-874f-c6683cc2fcba', passwordVariable: 'repo_passw', usernameVariable: 'repo_username')]) {
                       //  sh "echo \"${ARTIFACTORY_CRED_PSW}\" | docker login -u \"${ARTIFACTORY_CRED_USR}\" docker-virtual.artifactory --password-stdin"
@@ -45,7 +41,6 @@ pipeline {
                         //sh "docker pull docker-virtual.artifactory/${params.image_name}:117"
                         // Create container
                         //sh "docker run -p 8089:8080 -d --name ${params.container_name} docker-virtual.artifactory/${params.image_name}:117"
-                }
             }
         }
 
