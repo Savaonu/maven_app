@@ -27,9 +27,10 @@ pipeline {
         }        
 
         stage('test'){
-
+            steps {
             sh "echo $build"
                 sh "echo cacacacac"
+            }
         }
         stage('Deploy to App'){
             steps {
