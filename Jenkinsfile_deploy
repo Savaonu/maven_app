@@ -20,8 +20,8 @@ pipeline {
         stage('Get deploy no'){
             steps {
                 script {
-                    def jobname = "maven_pipeline_p1"
-                    def job = Jenkins.instance.getItemByFullName(jobname)
+                    //def jobname = 'maven_pipeline_p1'
+                    def job = Jenkins.instance.getItemByFullName(maven_pipeline_p1)
                     myVAr = job.getLastBuild()
                     println myVAr
                 }
