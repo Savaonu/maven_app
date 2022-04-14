@@ -21,6 +21,7 @@ pipeline {
                     def jobname = "maven_pipeline_p1"
                     def job = Jenkins.instance.getItemByFullName(jobname)
                     def build = job.getLastBuild()
+                    println build
                 }
             }
         }        
