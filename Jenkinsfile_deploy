@@ -29,10 +29,12 @@ pipeline {
             steps {
                 // Clean old Container
                 sh "chmod +x ./cleanup.sh && ./cleanup.sh "
-                def jobname = "maven_pipeline_p1"
+                script {
+                    def jobname = "maven_pipeline_p1"
                     def job = Jenkins.instance.getItemByFullName(jobname)
                     def build = job.getLastBuild()
                     println build
+                }
 
                 // Push to Artifactory docker registry
                 //withCredentials([usernamePassword(credentialsId: 'ae4a797f-6a03-4dc7-874f-c6683cc2fcba', passwordVariable: 'repo_passw', usernameVariable: 'repo_username')]) {
