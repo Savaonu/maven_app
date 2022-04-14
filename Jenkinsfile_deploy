@@ -22,8 +22,9 @@ pipeline {
                 script {
                     //def jobname = 'maven_pipeline_p1'
                     def job = Jenkins.instance.getItemByFullName('maven_pipeline_p1')
-                    myVAr = job.getLastBuild()
-                    println myVAr
+                    //myVAr = job.getLastBuild()
+                    echo "var is: ${job.getLastBuild()}"
+                    //println myVAr
                 }
             }
         }   /*  
