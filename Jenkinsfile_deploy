@@ -24,9 +24,9 @@ pipeline {
                      myVAr = Jenkins.instance.getItemByFullName('maven_pipeline_p1').getLastBuild()
                     //sh " myVAr = job.getLastBuild()" 
                     //echo "var is: ${job.getLastBuild()}"
-                    echo "var is : $myVAr"
+                    //echo "var is : $myVAr"
                     //sh "echo var is: $myVAr "
-                    //println myVAr
+                    println myVAr
                 }
             }
         }  /* 
@@ -77,6 +77,6 @@ pipeline {
         timeout(time: 5, unit: 'MINUTES')
     }*/
 }
-def sendEmail(status) {
+/*def sendEmail(status) {
     mail body: "<b>Project build </b>" + "<b>$status</b>"   + "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", charset: 'UTF-8', from: 'jenkins@test.com', mimeType: 'text/html', replyTo: '', subject: status + "  CI: Project name -> ${env.JOB_NAME}", to: "alexandru.sava@accesa.eu";
-} 
+} */
