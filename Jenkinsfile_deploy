@@ -32,7 +32,7 @@ pipeline {
                     //println myVAr
 
                     valoarea = null
-                    sh "echo $valoarea ${valoarea} "
+                    sh "echo cacaca: $valoarea ${valoarea} cacac "
                     
                 }
                    // sh "echo $valoarea ${valoarea} " 
