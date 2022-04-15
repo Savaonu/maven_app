@@ -27,7 +27,7 @@ pipeline {
                     //echo "var is: ${job.getLastBuild()}"
                     echo "var is : $myVAr"
                     
-                    sh "echo var is: $myVAr "
+                    //sh "echo var is: $myVAr "
                     //println myVAr
                     
                 }
