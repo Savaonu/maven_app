@@ -33,6 +33,7 @@ pipeline {
 
                     valoarea = null
                     sh "echo cacaca: $valoarea ${valoarea} cacac "
+                    println valoarea
                     
                 }
                    // sh "echo $valoarea ${valoarea} " 
