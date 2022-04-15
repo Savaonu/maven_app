@@ -1,4 +1,4 @@
-def myVAr = '117'
+//def myVAr = '117'
 
 pipeline {
     agent {
@@ -22,7 +22,7 @@ pipeline {
                 script {
                     @NonCPS
                     //def jobname = 'maven_pipeline_p1'
-                     myVAr = Jenkins.instance.getItemByFullName('maven_pipeline_p1').getLastBuild()
+                    def myVAr = Jenkins.instance.getItemByFullName('maven_pipeline_p1').getLastBuild()
                     //sh " myVAr = job.getLastBuild()" 
                     //echo "var is: ${job.getLastBuild()}"
                     //echo "var is : $myVAr"
