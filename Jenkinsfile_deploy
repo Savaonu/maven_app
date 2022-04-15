@@ -14,14 +14,13 @@ pipeline {
         string(name: 'sonar_token', defaultValue: 'aca9fee4aae893fa63b46476fb1938ddaac62ed9', description: 'The token from Sonarqube')
         string(name: 'sonar_srv', defaultValue: 'http://172.30.68.55:9000', description: 'The Sonarqube server')
         string(name: 'art_repo', defaultValue: 'docker-virtual.artifactory', description: 'Artifactory docker registry')
+        
     }
 
     stages {
         stage('Get deploy no'){
             steps {
                 script {
-                    def runWrapper = selectRun job: 'maven_pipeline_p1',  selector: buildNumber(UPSTREAM_BUILD_NUMBER) 
-                    echo "var is: ${runWrapper}"
                     //@NonCPS
                     //def jobname = 'maven_pipeline_p1'
                     //def art_user = jobname.buildVariables.ARTIFACTORY_CRED
@@ -50,10 +49,10 @@ pipeline {
                 
 
             }
-        }  /* 
+        }  
         stage('Deploy to App'){
             steps {
-                    sh "echo ${myVar}"
+                    sh "echo ${params.systemname}"
                     // Clean old Container
                     sh "chmod +x ./cleanup.sh && ./cleanup.sh "    
                     // Push to Artifactory docker registry
@@ -76,8 +75,8 @@ pipeline {
                         // Info via email from windows node
                         emailext body: "<b>Project build successful</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", from: 'jenkins@test.com', mimeType: 'text/html', replyTo: '', subject: "SUCCESSFUL CI: Project name -> ${env.JOB_NAME}", to: "alexandru.sava@accesa.eu";
                     }
-        }*/
-    }/*
+        }
+    }
     post {
          failure {
                 // Info via email about failed job
@@ -87,8 +86,8 @@ pipeline {
               // Info via email about unsuccessful job 
             sendEmail("Unsuccessful");
         } 
-    }*/
-   /* options {
+    }
+    options {
         // For example, we'd like to make sure we only keep 10 builds at a time, so
         // we don't fill up our storage!
         buildDiscarder(logRotator(numToKeepStr: '10'))
@@ -96,8 +95,8 @@ pipeline {
         // And we'd really like to be sure that this build doesn't hang forever, so
         // let's time it out after an hour.
         timeout(time: 5, unit: 'MINUTES')
-    }*/
+    }
 }
-/*def sendEmail(status) {
+def sendEmail(status) {
     mail body: "<b>Project build </b>" + "<b>$status</b>"   + "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", charset: 'UTF-8', from: 'jenkins@test.com', mimeType: 'text/html', replyTo: '', subject: status + "  CI: Project name -> ${env.JOB_NAME}", to: "alexandru.sava@accesa.eu";
-} */
+} 
