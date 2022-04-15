@@ -1,4 +1,4 @@
-//def myVAr = '117'
+def myVAr = '117'
 
 pipeline {
     agent {
