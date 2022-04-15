@@ -29,6 +29,8 @@ pipeline {
                     
                     //sh "echo var is: $myVAr "
                     //println myVAr
+
+                    myVAr = null
                     
                 }
                    //sh "chmod +x ./cleanup.sh && ./cleanup.sh " 
