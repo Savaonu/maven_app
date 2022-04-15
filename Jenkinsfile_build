@@ -28,7 +28,6 @@ pipeline {
         
                     //sh "mvn deploy -f artifactory-maven-plugin-example/ -s artifactory-maven-plugin-example/settings.xml"
                     def mvnHome = tool 'Maven 3.6.3'
-                    env.Username = ${env.BUILD_NUMBER}
                     sh "'${mvnHome}/bin/mvn' -f app/ package deploy -f app/ -Dusername=${ARTIFACTORY_CRED_USR} -Dpassword=${ARTIFACTORY_CRED_PSW} -D${env.BUILD_NUMBER}"
                 }
             }
