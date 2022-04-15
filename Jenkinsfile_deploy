@@ -20,21 +20,24 @@ pipeline {
         stage('Get deploy no'){
             steps {
                 script {
-                    @NonCPS
+                    //@NonCPS
+                    def jobname = 'maven_pipeline_p1'
+                    def art_user = jobname.buildVariables.ARTIFACTORY_CRED
+                    println art_user
                     //def jobname = 'maven_pipeline_p1'
                     //sh " myVAr = job.getLastBuild()" 
                     //echo "var is: ${job.getLastBuild()}"
                     //echo "var is : $myVAr"
-                    def valoarea = Jenkins.instance.getItemByFullName('maven_pipeline_p1').getLastBuild()
-                    return valoarea
+                    //def valoarea = Jenkins.instance.getItemByFullName('maven_pipeline_p1').getLastBuild()
+                    //return valoarea
 
                     //sh "echo var is: $myVAr "
                     //println myVAr
 
-                    valoarea = null
-                    sh "echo cacaca: $valoarea ${valoarea} cacac "
-                    println valoarea
-                    sh "docker pull docker-virtual.artifactory/${params.image_name}:${valoarea}"
+                    //valoarea = null
+                    //sh "echo cacaca: $valoarea ${valoarea} cacac "
+                    //println valoarea
+                    //sh "docker pull docker-virtual.artifactory/${params.image_name}:${valoarea}"
                     
                 }
                    // sh "echo $valoarea ${valoarea} " 
