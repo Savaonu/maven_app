@@ -25,9 +25,9 @@ pipeline {
                     def myVAr = Jenkins.instance.getItemByFullName('maven_pipeline_p1').getLastBuild()
                     //sh " myVAr = job.getLastBuild()" 
                     //echo "var is: ${job.getLastBuild()}"
-                    echo "var is : $myVAr"
+                    //echo "var is : $myVAr"
                     
-                    //sh "echo var is: $myVAr "
+                    sh "echo var is: $myVAr "
                     //println myVAr
 
                     myVAr = null
