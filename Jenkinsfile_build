@@ -74,7 +74,7 @@ pipeline {
                 }
         stage ('Starting ART job') {
             steps {
-                build job: 'maven_pipeline_p2', parameters: [[$class: 'StringParameterValue', name: 'systemname', value: ${env.BUILD_NUMBER}]]
+                build job: 'maven_pipeline_p2', parameters: [[$class: 'StringParameterValue', name: 'systemname', value: "${env.BUILD_NUMBER}"]]
             }
         }
     }
