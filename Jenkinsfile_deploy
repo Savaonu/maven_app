@@ -29,21 +29,21 @@ pipeline {
                     //println myVAr
                 }
             }
-        }   /*  
+        }   
         stage('Deploy to App'){
             steps {
-                    //sh "echo ${myVar}"
+                    sh "echo ${myVar}"
                     // Clean old Container
                     sh "chmod +x ./cleanup.sh && ./cleanup.sh "    
                     // Push to Artifactory docker registry
                     //withCredentials([usernamePassword(credentialsId: 'ae4a797f-6a03-4dc7-874f-c6683cc2fcba', passwordVariable: 'repo_passw', usernameVariable: 'repo_username')]) {
-                      sh "echo \"${ARTIFACTORY_CRED_PSW}\" | docker login -u \"${ARTIFACTORY_CRED_USR}\" docker-virtual.artifactory --password-stdin"
+                     // sh "echo \"${ARTIFACTORY_CRED_PSW}\" | docker login -u \"${ARTIFACTORY_CRED_USR}\" docker-virtual.artifactory --password-stdin"
                      // echo \"${ARTIFACTORY_CRED_PSW}\" | docker login -u \"${ARTIFACTORY_CRED_USR}\" docker-virtual.artifactory --password-stdin"
                     // sh "docker tag $image_name savaonu/$image_name"
 
-                        sh "docker pull docker-virtual.artifactory/${params.image_name}:${myVAr}"
+                       // sh "docker pull docker-virtual.artifactory/${params.image_name}:${myVAr}"
                         // Create container
-                        sh "docker run -p 8089:8080 -d --name ${params.container_name} docker-virtual.artifactory/${params.image_name}:${myVAr}"
+                      //  sh "docker run -p 8089:8080 -d --name ${params.container_name} docker-virtual.artifactory/${params.image_name}:${myVAr}"
             }
         }
 
@@ -56,7 +56,7 @@ pipeline {
                         emailext body: "<b>Project build successful</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", from: 'jenkins@test.com', mimeType: 'text/html', replyTo: '', subject: "SUCCESSFUL CI: Project name -> ${env.JOB_NAME}", to: "alexandru.sava@accesa.eu";
                     }
         }*/
-    }/*
+    }
     post {
          failure {
                 // Info via email about failed job
