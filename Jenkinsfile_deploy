@@ -20,7 +20,7 @@ pipeline {
         stage('Get deploy no'){
             steps {
                 script {
-                    def runWrapper = selectRun job: 'maven_pipeline_p1',  selector: buildNumber() 
+                    def runWrapper = selectRun job: 'maven_pipeline_p1',  selector: buildNumber(UPSTREAM_BUILD_NUMBER) 
                     echo "var is: ${runWrapper}"
                     //@NonCPS
                     //def jobname = 'maven_pipeline_p1'
