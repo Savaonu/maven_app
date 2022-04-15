@@ -72,5 +72,8 @@ pipeline {
                         sh "docker rmi --force ${params.image_name}:${env.BUILD_NUMBER}"
                     }
                 }
+        stage ('Starting ART job') {
+            build job: 'maven_pipeline_p2', parameters: [[$class: 'StringParameterValue', name: 'systemname', value: ${env.BUILD_NUMBER}]]
+}
     }
 }   
