@@ -22,10 +22,10 @@ pipeline {
                 script {
                     @NonCPS
                     //def jobname = 'maven_pipeline_p1'
-                    def myVAr = Jenkins.instance.getItemByFullName('maven_pipeline_p1').getLastBuild()
                     //sh " myVAr = job.getLastBuild()" 
                     //echo "var is: ${job.getLastBuild()}"
                     //echo "var is : $myVAr"
+                    def myVAr = Jenkins.instance.getItemByFullName('maven_pipeline_p1')
                     valoarea = myVAr.getLastBuild()
                     return valoarea
 
