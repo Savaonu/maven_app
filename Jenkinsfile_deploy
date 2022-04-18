@@ -9,22 +9,64 @@ pipeline {
     parameters {
         string(name: 'image_name', defaultValue: 'maven_image', description: 'Name of the image')
         string(name: 'container_name', defaultValue: 'my_maven_app', description: 'Name of the container')
-        string(name: 'sonar_token', defaultValue: 'aca9fee4aae893fa63b46476fb1938ddaac62ed9', description: 'The token from Sonarqube')
-        string(name: 'sonar_srv', defaultValue: 'http://172.30.68.55:9000', description: 'The Sonarqube server')
         string(name: 'art_repo', defaultValue: 'docker-virtual.artifactory', description: 'Artifactory docker registry')
         
     }
 
     stages {
-        stage('Deploy to App'){
+        stage('Cleanup'){
             steps {
                     // Clean old Container
                     sh "chmod +x ./cleanup.sh && ./cleanup.sh "    
-                    sh "echo \"${ARTIFACTORY_CRED_PSW}\" | docker login -u \"${ARTIFACTORY_CRED_USR}\" docker-virtual.artifactory --password-stdin"
-                    sh "docker pull docker-virtual.artifactory/${params.image_name}:${params.tag}"
-                        // Create container
-                    sh "docker run -p 8089:8080 -d --name ${params.container_name} docker-virtual.artifactory/${params.image_name}:${params.tag}"
             }
+        }
+
+        stage('Deploy App'){
+            steps {
+                script {
+                    try {
+                        // Pull image from docker registry
+                        sh "echo \"${ARTIFACTORY_CRED_PSW}\" | docker login -u \"${ARTIFACTORY_CRED_USR}\" docker-virtual.artifactory --password-stdin"
+                        sh "docker pull docker-virtual.artifactory/${params.image_name}:${params.tag}"
+                        // Create container
+                        sh "docker run -p 8089:8080 -d --name ${params.container_name} docker-virtual.artifactory/${params.image_name}:${params.tag}"
+                    }
+                    catch(error) {
+                        retry(2) {
+                            echo "Retry deploy"
+                            sh "echo \"${ARTIFACTORY_CRED_PSW}\" | docker login -u \"${ARTIFACTORY_CRED_USR}\" docker-virtual.artifactory --password-stdin"
+                            sh "docker pull docker-virtual.artifactory/${params.image_name}:${params.tag}"
+                            sh "docker run -p 8089:8080 -d --name ${params.container_name} docker-virtual.artifactory/${params.image_name}:${params.tag}"
+                        }
+                        echo "The app was not deployed, please check the errors!!!"
+                    }
+                }
+            }
+        }
+        stage('Check app') {
+            stage('Check containers test ') {
+                steps {
+                    script {
+                        sh "docker ps -f status=running  -f name=${params.image_name} | wc -l > docker_running"
+                        result = readFile('docker_running').trim()
+                        int res = result as int
+                        if (res == 2) {
+                            println "The nodejs container is up and running"
+                        }
+                        else if (res > 2) {
+                            println "ERROR: please the env. There are more containers running "
+                            currentBuild.result = 'FAILED'
+                        }
+                        else {
+                            println "ERROR: the container is not running"
+                            currentBuild.result = 'FAILED'
+                        }
+                    }
+
+                }
+            }
+
+
         }
 
         stage('Email'){
@@ -48,13 +90,11 @@ pipeline {
         } 
     }
     options {
-        // For example, we'd like to make sure we only keep 10 builds at a time, so
-        // we don't fill up our storage!
+        // Keep only last 10 builds
         buildDiscarder(logRotator(numToKeepStr: '10'))
 
-        // And we'd really like to be sure that this build doesn't hang forever, so
-        // let's time it out after an hour.
-        timeout(time: 5, unit: 'MINUTES')
+        // Timeout when job is stuck for more than 2 minutes
+        timeout(time: 2, unit: 'MINUTES')
     }
 }
 def sendEmail(status) {
