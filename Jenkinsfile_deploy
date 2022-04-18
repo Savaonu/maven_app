@@ -44,27 +44,26 @@ pipeline {
             }
         }
         stage('Check app') {
-            stage('Check containers test ') {
-                steps {
-                    script {
-                        sh "docker ps -f status=running  -f name=${params.image_name} | wc -l > docker_running"
-                        result = readFile('docker_running').trim()
-                        int res = result as int
-                        if (res == 2) {
-                            println "The nodejs container is up and running"
-                        }
-                        else if (res > 2) {
-                            println "ERROR: please the env. There are more containers running "
-                            currentBuild.result = 'FAILED'
-                        }
-                        else {
-                            println "ERROR: the container is not running"
-                            currentBuild.result = 'FAILED'
-                        }
+            steps {
+                script {
+                    sh "docker ps -f status=running  -f name=${params.image_name} | wc -l > docker_running"
+                    result = readFile('docker_running').trim()
+                    int res = result as int
+                    if (res == 2) {
+                        println "The nodejs container is up and running"
                     }
-
+                    else if (res > 2) {
+                        println "ERROR: please the env. There are more containers running "
+                        currentBuild.result = 'FAILED'
+                    }
+                    else {
+                        println "ERROR: the container is not running"
+                        currentBuild.result = 'FAILED'
+                    }
                 }
+
             }
+            
 
 
         }
