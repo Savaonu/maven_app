@@ -46,7 +46,7 @@ pipeline {
         stage('Check app') {
             steps {
                 script {
-                    sh "docker ps -f status=running  -f name=${params.image_name} | wc -l > docker_running"
+                    sh "docker ps -f status=running  -f name=${params.container_name} | wc -l > docker_running"
                     result = readFile('docker_running').trim()
                     int res = result as int
                     if (res == 2) {
