@@ -78,7 +78,7 @@
                                 <timeoutSec>60</timeoutSec>
                             </artifactory>
                             <publisher>
-                                <contextUrl>http://72.31.96.59:8081/artifactory/maven_repo/</contextUrl>
+                                <contextUrl>http://172.31.96.59:8081/artifactory/maven_repo/</contextUrl>
                                 <username>${username}</username>
                                 <password>${password}</password>
                                 <excludePatterns>*-tests.jar</excludePatterns>
