@@ -10,7 +10,7 @@ pipeline {
         string(name: 'image_name', defaultValue: 'maven_image', description: 'Name of the image')
         string(name: 'container_name', defaultValue: 'my_maven_app', description: 'Name of the container')
         string(name: 'sonar_token', defaultValue: 'aca9fee4aae893fa63b46476fb1938ddaac62ed9', description: 'The token from Sonarqube')
-        string(name: 'sonar_srv', defaultValue: 'http://172.30.68.55:9000', description: 'The Sonarqube server')
+        string(name: 'sonar_srv', defaultValue: 'http://172.31.96.59:9000', description: 'The Sonarqube server')
         string(name: 'art_repo', defaultValue: 'docker-virtual.artifactory', description: 'Artifactory docker registry')
     }
 
