@@ -78,7 +78,6 @@ pipeline {
                     steps {
                         // Delete the image pushed to Artifactory
                         sh "docker rmi --force docker-virtual.artifactory/${params.image_name}:${env.BUILD_NUMBER}"
-                        sh "docker rmi --force ${params.image_name}:${env.BUILD_NUMBER}"
                     }
                 }
         stage ('Starting Deploy job') {
