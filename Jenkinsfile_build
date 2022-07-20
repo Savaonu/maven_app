@@ -1,6 +1,6 @@
 pipeline {
     agent {
-            label "master"
+            label "lin_node"
         }
     environment {
         DOCKER_HUB_CRED = credentials('docker_cred')
