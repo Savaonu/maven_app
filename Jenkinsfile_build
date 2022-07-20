@@ -1,6 +1,6 @@
 pipeline {
     agent {
-            label "slave_maven_build"
+            label "master"
         }
     environment {
         DOCKER_HUB_CRED = credentials('docker_cred')
