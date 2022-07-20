@@ -21,7 +21,22 @@ pipeline {
                 git 'https://github.com/Savaonu/maven_app'
             }
         }
-        
+
+        stage('Test') {
+            when {
+                allof{
+                    chageset "app/**"
+                }
+            }
+            steps {
+                script{
+                    sh "echo am ajuns la step"
+                }
+            }
+
+        }
+
+       /* 
         stage('Maven build') {
             steps {
                 script {
@@ -87,5 +102,6 @@ pipeline {
                 build job: 'maven_pipeline_p2', parameters: [[$class: 'StringParameterValue', name: 'tag', value: "${env.BUILD_NUMBER}"]]
             }
         }
+        */
     }
 }   
