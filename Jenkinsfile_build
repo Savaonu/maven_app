@@ -24,7 +24,7 @@ pipeline {
 
         stage('Test') {
             when {
-                allof{
+                allOf{
                     chageset "app/**"
                 }
             }
