@@ -35,7 +35,7 @@ pipeline {
             }
 
         }
-        tage('Test') {
+        stage('Test') {
             steps{
                 dir("${WORKSPACE}/openapi-specs") {
                     sh "mkdir target"
